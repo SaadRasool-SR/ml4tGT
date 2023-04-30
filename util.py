@@ -23,8 +23,7 @@ def get_data(symbols, dates, addSPY=True, colname="Adj Close"):
     if addSPY and "SPY" not in symbols:  # add SPY for reference, if absent  		  	   		  		 			  		 			     			  	 
         symbols = ["SPY"] + list(  		  	   		  		 			  		 			     			  	 
             symbols  		  	   		  		 			  		 			     			  	 
-        )  # handles the case where symbols is np array of 'object'  		  	   		  		 			  		 			     			  	 
-  		  	   		  		 			  		 			     			  	 
+        )  # handles the case where symbols is np array of 'object'  		  	   		  		 			  		 			     			  	   	   		  		 			  		 			     			  	 
     for symbol in symbols:  		  	   		  		 			  		 			     			  	 
         df_temp = pd.read_csv(  		  	   		  		 			  		 			     			  	 
             symbol_to_path(symbol),  		  	   		  		 			  		 			     			  	 
@@ -32,12 +31,11 @@ def get_data(symbols, dates, addSPY=True, colname="Adj Close"):
             parse_dates=True,  		  	   		  		 			  		 			     			  	 
             usecols=["Date", colname],  		  	   		  		 			  		 			     			  	 
             na_values=["nan"],  		  	   		  		 			  		 			     			  	 
-        )  		  	   		  		 			  		 			     			  	 
+        ) 	   		  		 			  		 			     			  	 
         df_temp = df_temp.rename(columns={colname: symbol})  		  	   		  		 			  		 			     			  	 
         df = df.join(df_temp)  		  	   		  		 			  		 			     			  	 
         if symbol == "SPY":  # drop dates SPY did not trade  		  	   		  		 			  		 			     			  	 
-            df = df.dropna(subset=["SPY"])  		  	   		  		 			  		 			     			  	 
-  		  	   		  		 			  		 			     			  	 
+            df = df.dropna(subset=["SPY"]) 
     return df  		  	   		  		 			  		 			     			  	 
   		  	   		  		 			  		 			     			  	 
   		  	   		  		 			  		 			     			  	 
